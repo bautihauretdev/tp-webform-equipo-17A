@@ -9,8 +9,8 @@ namespace dominio
     public class Marca
     {
         // ATRIBUTOS
-        public int id { get; set; } // Autoincrementable tomando de referencia el último que encuentra
-        public string descripcion { get; set; }
+        public int Id { get; set; } // Autoincrementable tomando de referencia el último que encuentra
+        public string Descripcion { get; set; }
 
         // CONSTRUCTOR SIN PARÁMETROS
         public Marca() { }
@@ -18,8 +18,8 @@ namespace dominio
         // CONSTRUCTOR CON PARÁMETROS
         public Marca(int id, string descripcion)
         {
-            this.id = id;
-            this.descripcion = descripcion;
+            this.Id = id;
+            this.Descripcion = descripcion;
         }
     }
 }
