@@ -18,11 +18,9 @@ namespace dominio
         public decimal Precio { get; set; }
         public string ImagenUrl { get; set; }
 
-        // !!! QUEDA COMENTADO HASTA AGREGAR CLS CATEGORIA
-
-        //Llamado a otras clases
+        // LLAMADO A OTRAS CLASES
         public Marca Marca { get; set; }
-        //public Categoria Categoria { get; set; }
+        public Categoria Categoria { get; set; }
         public List<Imagen> Imagenes { get; set; } = new List<Imagen>();
 
         [DisplayName("Marca")]
@@ -30,11 +28,11 @@ namespace dominio
         {
             get { return Marca != null ? Marca.Descripcion : ""; }
         }
-        //[DisplayName("Categoria")]
-        //public string NombreCategoria
-        //{
-        //    get { return Categoria != null ? Categoria.Descripcion : ""; }
-        //}
+        [DisplayName("Categoria")]
+        public string NombreCategoria
+        {
+            get { return Categoria != null ? Categoria.Descripcion : ""; }
+        }
 
         // CONSTRUCTOR SIN PARAMETROS
         public Articulo() { }

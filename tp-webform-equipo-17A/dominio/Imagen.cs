@@ -11,7 +11,6 @@ namespace dominio
         // ATRIBUTOS:
         public int Id { get; set; }
         public int IdArticulo { get; set; }
-
         public string ImagenURL { get; set; }
 
         // CONSTRUCTOR CON PARAMETROS

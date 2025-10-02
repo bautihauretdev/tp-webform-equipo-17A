@@ -12,9 +12,10 @@ namespace dominio
         public int Id { get; set; }
         public string Descripcion { get; set; }
 
-        // CONSTRUCTOR
+        // CONSTRUCTOR SIN PARAMETROS
         public Categoria() { }
 
+        // CONSTRUCTOR CON PARAMETROS
         public Categoria(int id, string descripcion)
         {
             this.Id = id;

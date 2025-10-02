@@ -1,14 +1,14 @@
-﻿using dominio;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using dominio;
 
 namespace negocio
 {
-    internal class CategoriaNegocio
+    public class CategoriaNegocio
     {
         public List<Categoria> Listar()
         {

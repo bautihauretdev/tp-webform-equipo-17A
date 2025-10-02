@@ -7,7 +7,7 @@ using System.Web;
 using System.Configuration;
 
 
-namespace TPWebForm_equipo_17A.Data
+namespace negocio
 {
     public class AccesoDatos
     {
@@ -15,12 +15,9 @@ namespace TPWebForm_equipo_17A.Data
         private SqlCommand comando;
         private SqlDataReader lector;
 
-
         public SqlDataReader Lector
         {
-
             get { return lector; }
-
         }
 
         public AccesoDatos()
