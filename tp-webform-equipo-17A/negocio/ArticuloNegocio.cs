@@ -40,6 +40,23 @@ namespace negocio
                     articulo.IdCategoria = (int)lector["IdCategoria"];
                     articulo.Categoria = new Categoria((int)lector["IdCategoria"], lector["Categoria"].ToString());
                     articulo.ImagenUrl = lector["ImagenUrl"] != DBNull.Value ? lector["ImagenUrl"].ToString() : null;
+
+                    // NUEVO: traemos todas las imágenes
+                    AccesoDatos datosImagen = new AccesoDatos();
+                    datosImagen.setearConsulta("SELECT Id, IdArticulo, ImagenUrl FROM IMAGENES WHERE IdArticulo = @IdArticulo");
+                    datosImagen.setearParametro("@IdArticulo", articulo.Id);
+                    SqlDataReader lectorImagen = datosImagen.ejecutarLectura();
+
+                    while (lectorImagen.Read())
+                    {
+                        articulo.Imagenes.Add(new Imagen(
+                            (int)lectorImagen["Id"],
+                            (int)lectorImagen["IdArticulo"],
+                            lectorImagen["ImagenUrl"].ToString()
+                        ));
+                    }
+                    datosImagen.cerrarConexion();
+
                     lista.Add(articulo);
                 }
                 datos.cerrarConexion();

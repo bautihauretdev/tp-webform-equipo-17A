@@ -157,3 +157,5 @@ SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion as Marc
 FROM ARTICULOS A 
 JOIN MARCAS M ON A.IdMarca = M.Id 
 JOIN CATEGORIAS C ON A.IdCategoria = C.Id
+
+SELECT Id, IdArticulo, ImagenUrl FROM IMAGENES WHERE IdArticulo = @IdArticulo
