@@ -17,9 +17,19 @@ namespace presentacionWebForm
             ArticuloNegocio artNegocio = new ArticuloNegocio();
             ListaArticulos = artNegocio.Listar();
 
-            rRepetidor.DataSource = ListaArticulos;
-            rRepetidor.DataBind();
+            if (!IsPostBack)
+            {
+                rRepetidor.DataSource = ListaArticulos;
+                rRepetidor.DataBind();
+            }
+        }
 
+        protected void btnQuieroEste_Click(object sender, EventArgs e)
+        {
+            string premioSeleccionado = ((Button)sender).CommandArgument; // Tengo el ID del artículo en string
+            Session["articuloId"] = premioSeleccionado;
+
+            Response.Redirect("Default.aspx"); // 
         }
     }
 }
