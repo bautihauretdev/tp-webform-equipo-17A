@@ -1,4 +1,12 @@
-﻿.ajuste-imagen {
+﻿/* NAV MASTER PAGE*/
+.nav-link.active.custom-link:hover,
+.nav-link.active.custom-link:focus {
+    color: cornflowerblue !important;
+    transition: all 0.3s ease;
+}
+
+/* PREMIOS - AJUSTES CARDS */
+.ajuste-imagen {
     height: 250px;
     width: 100%;
     object-fit: contain; /* Recorta la imagen sin deformarla */
@@ -14,9 +22,12 @@
 .btn-dark:hover,
 .btn-dark:focus {
     background-color: white;
-    color: black;
-    outline: 1px solid black;
+    color: steelblue;
+    outline: 2px solid steelblue;
+    box-shadow: none !important;
+    border: none;
     font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 /* centrar horizontalmente  */

@@ -150,6 +150,7 @@ SELECT * FROM Vouchers
 
 SELECT * FROM ARTICULOS
 
+SELECT * FROM IMAGENES
 
 SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion as Marca, A.IdCategoria, C.Descripcion as Categoria, A.Precio, 
 (SELECT TOP 1 ImagenUrl FROM IMAGENES I WHERE I.IdArticulo = A.Id) as ImagenUrl
