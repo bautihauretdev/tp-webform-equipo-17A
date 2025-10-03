@@ -1,2 +1,26 @@
-﻿body {
+﻿.ajuste-imagen {
+    height: 250px;
+    width: 100%;
+    object-fit: contain; /* Recorta la imagen sin deformarla */
+    object-position: center; /* Centra el recorte */
+}
+
+.tituloPemio{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.btn-dark:hover,
+.btn-dark:focus {
+    background-color: white;
+    color: black;
+    outline: 1px solid black;
+    font-weight: 600;
+}
+
+/* centrar horizontalmente  */
+.centrado {
+    display: block;
+    margin: 0 auto; 
 }
