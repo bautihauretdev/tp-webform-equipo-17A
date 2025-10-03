@@ -62,6 +62,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Styles.css" />
     <Content Include="DatosCliente.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
