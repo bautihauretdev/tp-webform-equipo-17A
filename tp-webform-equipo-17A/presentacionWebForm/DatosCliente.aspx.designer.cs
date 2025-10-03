@@ -24,6 +24,24 @@ namespace presentacionWebForm
         protected global::System.Web.UI.WebControls.TextBox txtDNI;
 
         /// <summary>
+        /// Control btnBuscarDNI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscarDNI;
+
+        /// <summary>
+        /// Control lblDniMensaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDniMensaje;
+
+        /// <summary>
         /// Control txtNombre.
         /// </summary>
         /// <remarks>
