@@ -27,9 +27,9 @@ namespace presentacionWebForm
         protected void btnQuieroEste_Click(object sender, EventArgs e)
         {
             string premioSeleccionado = ((Button)sender).CommandArgument; // Tengo el ID del artículo en string
-            Session["articuloId"] = premioSeleccionado;
+            Session["articuloId"] = premioSeleccionado; // Queda en session el id -> luego guardarlo en el Voucher
 
-            Response.Redirect("Default.aspx"); // 
+            Response.Redirect("DatosCliente.aspx");
         }
     }
 }

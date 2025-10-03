@@ -13,6 +13,12 @@ namespace presentacionWebForm
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // CUANDO ESTÉN EL ARTÍCULO SELECCIONADO Y EL CLIENTE CARGADO,
+            // HAY QUE GUARDAR AMBOS DATOS EN EL VOUCHER.
+
+            // PARA LEVANTAR EL ID DE ARTICULO SELECCIONADO (por Session):
+            // Session["articuloId"] != null ? Session["articuloId"].ToString() : "";
+            // (!) Pasarlo a int
         }
     }
 }
