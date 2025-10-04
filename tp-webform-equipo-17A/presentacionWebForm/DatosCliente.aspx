@@ -75,7 +75,7 @@
         <!-- Botón Participar -->
         <div class="row mb-4">
             <div class="col-12">
-                <asp:Button ID="btnParticipar" runat="server" CssClass="btn btn-primary btn-block" Text="¡Participar!" />
+                <asp:Button ID="btnParticipar" runat="server" CssClass="btn btn-primary btn-block" Text="¡Participar!" OnClick="btnParticipar_Click" />
             </div>
         </div>
     </div>

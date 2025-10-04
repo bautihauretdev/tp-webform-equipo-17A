@@ -61,5 +61,66 @@ namespace presentacionWebForm
             txtCiudad.Text = "";
             txtCP.Text = "";
         }
+
+        protected void btnParticipar_Click(object sender, EventArgs e)
+        {
+            if (!chkTerminos.Checked)
+            {
+                lblDniMensaje.Text = "Debe aceptar los términos y condiciones.";
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtDNI.Text) ||
+                   string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                   string.IsNullOrWhiteSpace(txtApellido.Text) ||
+                   string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                   string.IsNullOrWhiteSpace(txtDireccion.Text) ||
+                   string.IsNullOrWhiteSpace(txtCiudad.Text) ||
+                   string.IsNullOrWhiteSpace(txtCP.Text))
+            {
+                lblDniMensaje.Text = "Debe completar todos los campos.";
+                return;
+            }
+            //validacion para email
+            if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
+            {
+                lblDniMensaje.Text = "Ingrese un email válido.";
+                return;
+            }
+            //valida que el dni no exista
+            ClinteNegocio negocio = new ClinteNegocio();
+            Cliente clienteExistente = negocio.BuscarPorDocumento(txtDNI.Text.Trim());
+
+            if (clienteExistente != null)
+            {
+                lblDniMensaje.Text = "Ya existe un cliente con ese DNI.";
+                
+                return;
+            }
+
+            Cliente nuevoCliente = new Cliente
+            {
+                Documento = txtDNI.Text.Trim(),
+                Nombre = txtNombre.Text.Trim(),
+                Apellido = txtApellido.Text.Trim(),
+                Email = txtEmail.Text.Trim(),
+                Direccion = txtDireccion.Text.Trim(),
+                Ciudad = txtCiudad.Text.Trim(),
+                CP = int.TryParse(txtCP.Text.Trim(), out int cp) ? cp : 0
+            };
+
+            try
+            {
+                negocio.Agregar(nuevoCliente);
+                lblDniMensaje.Text = "¡Registro exitoso! Ahora puede participar en la promo.";
+                //FALTA HACER EL Redirigir a página de Exito
+                // Response.Redirect("Exito.aspx");
+                LimpiarCampos();
+            }
+            catch (Exception ex)
+            {
+                lblDniMensaje.Text = "Error al registrar el cliente: " + ex.Message;
+            }
+
+        }
     }
 }
