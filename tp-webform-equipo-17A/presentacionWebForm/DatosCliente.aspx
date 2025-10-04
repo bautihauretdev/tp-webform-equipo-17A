@@ -5,17 +5,37 @@
     <div class="container form-section">
         <div class="form-main-title">Ingresá tus datos</div>
         <!-- DNI -->
-        <div class="row mb-3">
+     <!-- DNI -->
+<div class="row mb-3">
     <div class="col-12">
         <label for="txtDNI" class="form-label">DNI</label>
         <div class="input-group">
             <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control" MaxLength="8"
-                 pattern="\d{7,8}" placeholder="Ingrese N° DNI" />
+                pattern="\d{7,8}" placeholder="Ingrese N° DNI" />
             <asp:Button ID="btnBuscarDNI" runat="server" Text="Buscar" OnClick="btnBuscarDNI_Click" CausesValidation="false" />
-        <asp:Label ID="lblDniMensaje" runat="server" CssClass="text-danger"></asp:Label>
         </div>
+         <asp:Label ID="lblDniMensaje" runat="server" CssClass="text-danger"></asp:Label>
         <div class="invalid-feedback">Ingrese un DNI válido (sólo números, 7 u 8 dígitos).</div>
-    </div>  
+    </div>
+</div>
+
+<!-- Cliente registrado ¿Actualizar datos? -->
+<div class="row mb-3">
+    <div class="col-12">
+        <asp:Label ID="lblClienteRegistrado" runat="server" CssClass="text-info" 
+            Text="Cliente ya registrado. ¿Desea actualizar datos?" Visible="false"></asp:Label>
+        <asp:RadioButtonList ID="rblActualizar" runat="server" RepeatDirection="Horizontal"
+    CssClass="radio-inline-spacing" RepeatLayout="Flow" Visible="false" AutoPostBack="true"
+    OnSelectedIndexChanged="rblActualizar_SelectedIndexChanged">
+    <asp:ListItem Text="Sí" Value="si"></asp:ListItem>
+    <asp:ListItem Text="No" Value="no"></asp:ListItem>
+</asp:RadioButtonList>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-12">
+        <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-warning btn-block" Text="Actualizar" Visible="false" OnClick="btnActualizar_Click" />
+    </div>
 </div>
         <!-- Nombre, Apellido, Email -->
         <div class="row mb-3">
@@ -73,10 +93,11 @@
             </div>
         </div>
         <!-- Botón Participar -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <asp:Button ID="btnParticipar" runat="server" CssClass="btn btn-primary btn-block" Text="¡Participar!" OnClick="btnParticipar_Click" />
-            </div>
-        </div>
+       <div class="row mb-4">
+    <div class="col-12">
+        <asp:Button ID="btnParticipar" runat="server" CssClass="btn btn-primary btn-block" Text="¡Participar!" Visible="true" OnClick="btnParticipar_Click" />
+        <asp:Button ID="Button1" runat="server" CssClass="btn btn-warning btn-block" Text="Actualizar" Visible="false" OnClick="btnActualizar_Click" />
+    </div>
+</div>
     </div>
 </asp:Content>
