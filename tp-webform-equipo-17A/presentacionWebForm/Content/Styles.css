@@ -62,6 +62,55 @@
     width: 100%;
 }
 
+/* STYLES PARA VENTANA DE INGRESO DE VOUCHER */
+.voucher-container {
+    max-width: 430px;
+    margin: 40px auto 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 28px rgba(0,0,0,0.11);
+    padding: 2.2rem 2rem 2rem 2rem;
+    border-top: 5px solid #1677ff;
+}
 
+.voucher-title {
+    font-size: 1.7rem;
+    color: #1677ff;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.voucher-desc {
+    text-align: center;
+    margin-bottom: 1.3rem;
+    color: #555;
+    font-size: 1.12rem;
+}
+
+.voucher-input {
+    font-size: 1.12rem;
+    text-align: center;
+    border-radius: 7px;
+    border: 1.5px solid #a8cfff;
+    margin-bottom: 1.15rem;
+}
+
+.voucher-btn {
+    font-size: 1.13rem;
+    font-weight: 600;
+    padding: 0.62rem 0;
+    width: 100%;
+    background: #1677ff;
+    border: none;
+    border-radius: 7px;
+    color: #fff;
+    transition: background 0.22s;
+    margin-bottom: 0.2rem;
+}
+
+    .voucher-btn:hover {
+        background: #125dcc;
 
 

@@ -20,5 +20,18 @@ namespace presentacionWebForm
             // Session["articuloId"] != null ? Session["articuloId"].ToString() : "";
             // (!) Pasarlo a int
         }
+        protected void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            string voucher = txtVoucher.Text.Trim();
+            if (!string.IsNullOrEmpty(voucher))
+            {
+                Session["voucher"] = voucher;
+                Response.Redirect("Premios.aspx");
+            }
+            else
+            {
+
+            }
+        }
     }
 }
