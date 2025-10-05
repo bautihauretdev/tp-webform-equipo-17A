@@ -71,6 +71,23 @@ namespace negocio
         {
             comando.Parameters.AddWithValue(nombre, valor ?? DBNull.Value);
         }
+        public int ejecutarNonQuery()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
 
         public void cerrarConexion()
         {
