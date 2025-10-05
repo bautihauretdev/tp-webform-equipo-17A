@@ -159,8 +159,8 @@ namespace presentacionWebForm
             {
                 negocio.Agregar(nuevoCliente);
                 lblDniMensaje.Text = "¡Registro exitoso! Ahora puede participar en la promo.";
-                //FALTA HACER EL redirigir a página de Exito
-                // Response.Redirect("Exito.aspx");
+            
+               Response.Redirect("Exito.aspx");
                 LimpiarCampos();
             }
             catch (Exception ex)

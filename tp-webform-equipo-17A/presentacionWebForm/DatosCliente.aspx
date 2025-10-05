@@ -5,7 +5,6 @@
     <div class="container form-section">
         <div class="form-main-title">Ingresá tus datos</div>
         <!-- DNI -->
-     <!-- DNI -->
 <div class="row mb-3">
     <div class="col-12">
         <label for="txtDNI" class="form-label">DNI</label>
@@ -24,19 +23,19 @@
     <div class="col-12">
         <asp:Label ID="lblClienteRegistrado" runat="server" CssClass="text-info" 
             Text="Cliente ya registrado. ¿Desea actualizar datos?" Visible="false"></asp:Label>
-        <asp:RadioButtonList ID="rblActualizar" runat="server" RepeatDirection="Horizontal"
-    CssClass="radio-inline-spacing" RepeatLayout="Flow" Visible="false" AutoPostBack="true"
-    OnSelectedIndexChanged="rblActualizar_SelectedIndexChanged">
-    <asp:ListItem Text="Sí" Value="si"></asp:ListItem>
-    <asp:ListItem Text="No" Value="no"></asp:ListItem>
-</asp:RadioButtonList>
+        <asp:RadioButtonList ID="rblActualizar" runat="server"
+            RepeatDirection="Horizontal"
+            CssClass="radio-inline-spacing"
+            RepeatLayout="Flow"
+            Visible="false"
+            AutoPostBack="true"
+            OnSelectedIndexChanged="rblActualizar_SelectedIndexChanged">
+            <asp:ListItem Text="Sí" Value="si"></asp:ListItem>
+            <asp:ListItem Text="No" Value="no"></asp:ListItem>
+        </asp:RadioButtonList>
     </div>
 </div>
-<div class="row mb-3">
-    <div class="col-12">
-        <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-warning btn-block" Text="Actualizar" Visible="false" OnClick="btnActualizar_Click" />
-    </div>
-</div>
+
         <!-- Nombre, Apellido, Email -->
         <div class="row mb-3">
             <div class="col-md-4">
@@ -96,7 +95,7 @@
        <div class="row mb-4">
     <div class="col-12">
         <asp:Button ID="btnParticipar" runat="server" CssClass="btn btn-primary btn-block" Text="¡Participar!" Visible="true" OnClick="btnParticipar_Click" />
-        <asp:Button ID="Button1" runat="server" CssClass="btn btn-warning btn-block" Text="Actualizar" Visible="false" OnClick="btnActualizar_Click" />
+        <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-warning btn-block" Text="Actualizar" Visible="false" OnClick="btnActualizar_Click" />
     </div>
 </div>
     </div>
