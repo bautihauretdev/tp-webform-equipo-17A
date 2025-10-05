@@ -13,12 +13,7 @@ namespace presentacionWebForm
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // CUANDO ESTÉN EL ARTÍCULO SELECCIONADO Y EL CLIENTE CARGADO,
-            // HAY QUE GUARDAR AMBOS DATOS EN EL VOUCHER.
-
-            // PARA LEVANTAR EL ID DE ARTICULO SELECCIONADO (por Session):
-            // Session["articuloId"] != null ? Session["articuloId"].ToString() : "";
-            // (!) Pasarlo a int
+           
         }
 
         protected void btnBuscarDNI_Click(object sender, EventArgs e)
@@ -127,6 +122,7 @@ namespace presentacionWebForm
                 lblDniMensaje.Text = "Debe completar todos los campos.";
                 return;
             }
+           
             if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
             {
                 lblDniMensaje.Text = "Ingrese un email válido.";
@@ -135,35 +131,71 @@ namespace presentacionWebForm
 
             ClinteNegocio negocio = new ClinteNegocio();
             Cliente clienteExistente = negocio.BuscarPorDocumento(txtDNI.Text.Trim());
+            int idCliente; 
 
             if (clienteExistente != null)
             {
-                //cliente ya existe, puede participar igual
-                Response.Redirect("Exito.aspx");
+                idCliente = clienteExistente.Id;
+            }
+            else
+            {
+                Cliente nuevoCliente = new Cliente
+                {
+                    Documento = txtDNI.Text.Trim(),
+                    Nombre = txtNombre.Text.Trim(),
+                    Apellido = txtApellido.Text.Trim(),
+                    Email = txtEmail.Text.Trim(),
+                    Direccion = txtDireccion.Text.Trim(),
+                    Ciudad = txtCiudad.Text.Trim(),
+                    CP = int.TryParse(txtCP.Text.Trim(), out int cp) ? cp : 0
+                };
+
+                try
+                {
+                   negocio.Agregar(nuevoCliente); 
+                    idCliente = nuevoCliente.Id;
+                }
+                catch (Exception ex)
+                {
+                    lblDniMensaje.Text = "Error al registrar el cliente: " + ex.Message;
+                    return;
+                }
+            }
+
+            string codigoVoucher = Session["voucherCodigo"]?.ToString();
+
+            if (string.IsNullOrEmpty(codigoVoucher) || Session["articuloId"] == null)
+            {
+                lblDniMensaje.Text = "No se encontró el código de voucher o el premio seleccionado. Vuelva a ingresar el voucher.";
+                
                 return;
             }
 
-            Cliente nuevoCliente = new Cliente
-            {
-                Documento = txtDNI.Text.Trim(),
-                Nombre = txtNombre.Text.Trim(),
-                Apellido = txtApellido.Text.Trim(),
-                Email = txtEmail.Text.Trim(),
-                Direccion = txtDireccion.Text.Trim(),
-                Ciudad = txtCiudad.Text.Trim(),
-                CP = int.TryParse(txtCP.Text.Trim(), out int cp) ? cp : 0
-            };
+            int idArticulo = Convert.ToInt32(Session["articuloId"]);
 
+          
             try
             {
-                negocio.Agregar(nuevoCliente);
-                lblDniMensaje.Text = "¡Registro exitoso! Ahora puede participar en la promo.";
-                Response.Redirect("Exito.aspx");
-                LimpiarCampos();
+                VoucherNegocio voucherNegocio = new VoucherNegocio();
+                
+                bool canjeExitoso = voucherNegocio.CanjearVoucher(codigoVoucher, idCliente, idArticulo);
+
+                if (canjeExitoso)
+                {
+                    // El canje fue exitoso. Limpiamos la sesión y redirigimos.
+                    Session.Remove("voucherCodigo");
+                    Session.Remove("articuloId");
+                    Response.Redirect("Exito.aspx");
+                }
+                else
+                {
+                    Session["mensajeVoucher"] = "El voucher ya fue canjeado o es inválido para esta promoción.";
+                    Response.Redirect("Default.aspx");
+                }
             }
             catch (Exception ex)
             {
-                lblDniMensaje.Text = "Error al registrar el cliente: " + ex.Message;
+                lblDniMensaje.Text = "Error al procesar la participación: " + ex.Message;
             }
         }
 

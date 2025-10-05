@@ -11,7 +11,7 @@
         <div class="input-group">
             <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control" MaxLength="8"
                 pattern="\d{7,8}" placeholder="Ingrese N° DNI" />
-            <asp:Button ID="btnBuscarDNI" runat="server" Text="Buscar" OnClick="btnBuscarDNI_Click" CausesValidation="false" />
+            <asp:Button ID="btnBuscarDNI" runat="server" Text="Buscar" CssClass="btn btn-primary btn-sm" OnClick="btnBuscarDNI_Click" CausesValidation="false" Style="width:auto; min-width:80px;" />
         </div>
          <asp:Label ID="lblDniMensaje" runat="server" CssClass="text-danger"></asp:Label>
         <div class="invalid-feedback">Ingrese un DNI válido (sólo números, 7 u 8 dígitos).</div>
@@ -96,6 +96,7 @@
     <div class="col-12">
         <asp:Button ID="btnParticipar" runat="server" CssClass="btn btn-primary btn-block" Text="¡Participar!" Visible="true" OnClick="btnParticipar_Click" />
         <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-warning btn-block" Text="Actualizar" Visible="false" OnClick="btnActualizar_Click" />
+        <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
     </div>
 </div>
     </div>

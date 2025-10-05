@@ -14,12 +14,12 @@ namespace presentacionWebForm
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // CUANDO ESTÉN EL ARTÍCULO SELECCIONADO Y EL CLIENTE CARGADO,
-            // HAY QUE GUARDAR AMBOS DATOS EN EL VOUCHER.
-
-            // PARA LEVANTAR EL ID DE ARTICULO SELECCIONADO (por Session):
-            // Session["articuloId"] != null ? Session["articuloId"].ToString() : "";
-            // (!) Pasarlo a int
+            if (Session["mensajeVoucher"] != null)
+            {
+                lblMensaje.Text = Session["mensajeVoucher"].ToString();
+                Session.Remove("mensajeVoucher"); // Borra el mensaje para que no quede persistente
+            }
+            
         }
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
@@ -40,7 +40,7 @@ namespace presentacionWebForm
 
                 if (existe)
                 {
-                    Session["voucher"] = voucher;
+                    Session["voucherCodigo"] = voucher;
                     Response.Redirect("Premios.aspx");
                 }
                 else
