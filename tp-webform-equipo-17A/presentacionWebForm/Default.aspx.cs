@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
 
 namespace presentacionWebForm
 {
@@ -25,12 +26,31 @@ namespace presentacionWebForm
             string voucher = txtVoucher.Text.Trim();
             if (!string.IsNullOrEmpty(voucher))
             {
-                Session["voucher"] = voucher;
-                Response.Redirect("Premios.aspx");
+                bool existe = false;
+                string connectionString ="Server= localhost\\SQLEXPRESS; Database=PROMOS_DB ;Trusted_Connection=True";
+                using (SqlConnection cnn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT COUNT(*) FROM Vouchers WHERE CodigoVoucher = @codigo";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@codigo", voucher);
+                    cnn.Open();
+                    int count = (int)cmd.ExecuteScalar();
+                    existe = count > 0;
+                }
+
+                if (existe)
+                {
+                    Session["voucher"] = voucher;
+                    Response.Redirect("Premios.aspx");
+                }
+                else
+                {
+                    lblVoucherMensaje.Text = "El voucher ingresado no existe.";
+                }
             }
             else
             {
-
+                lblVoucherMensaje.Text = "Debe ingresar un voucher.";
             }
         }
     }

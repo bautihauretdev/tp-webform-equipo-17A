@@ -6,7 +6,8 @@
         <div class="voucher-title">Promo Ganá!</div>
         <div class="voucher-desc">Ingresá aca tu voucher para participar!</div>
         <asp:TextBox ID="txtVoucher" runat="server" CssClass="form-control voucher-input" placeholder="XXXXXXXXXXXXXXX"></asp:TextBox>
+        <!-- Label para mostrar mensajes de error del voucher -->
+        <asp:Label ID="lblVoucherMensaje" runat="server" CssClass="text-danger mt-2"></asp:Label>
         <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="voucher-btn" OnClick="btnSiguiente_Click" />
-        <asp:Label ID="lblMensaje" runat="server" CssClass="text-center mt-2" ForeColor="Red"></asp:Label>
     </div>
 </asp:Content>

@@ -24,6 +24,15 @@ namespace presentacionWebForm
         protected global::System.Web.UI.WebControls.TextBox txtVoucher;
 
         /// <summary>
+        /// Control lblVoucherMensaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblVoucherMensaje;
+
+        /// <summary>
         /// Control btnSiguiente.
         /// </summary>
         /// <remarks>
@@ -31,14 +40,5 @@ namespace presentacionWebForm
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSiguiente;
-
-        /// <summary>
-        /// Control lblMensaje.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensaje;
     }
 }
