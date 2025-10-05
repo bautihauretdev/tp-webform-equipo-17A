@@ -117,30 +117,29 @@ namespace presentacionWebForm
                 return;
             }
             if (string.IsNullOrWhiteSpace(txtDNI.Text) ||
-                   string.IsNullOrWhiteSpace(txtNombre.Text) ||
-                   string.IsNullOrWhiteSpace(txtApellido.Text) ||
-                   string.IsNullOrWhiteSpace(txtEmail.Text) ||
-                   string.IsNullOrWhiteSpace(txtDireccion.Text) ||
-                   string.IsNullOrWhiteSpace(txtCiudad.Text) ||
-                   string.IsNullOrWhiteSpace(txtCP.Text))
+                string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtApellido.Text) ||
+                string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                string.IsNullOrWhiteSpace(txtDireccion.Text) ||
+                string.IsNullOrWhiteSpace(txtCiudad.Text) ||
+                string.IsNullOrWhiteSpace(txtCP.Text))
             {
                 lblDniMensaje.Text = "Debe completar todos los campos.";
                 return;
             }
-            //validacion para email
             if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
             {
                 lblDniMensaje.Text = "Ingrese un email válido.";
                 return;
             }
-            //valida que el dni no exista
+
             ClinteNegocio negocio = new ClinteNegocio();
             Cliente clienteExistente = negocio.BuscarPorDocumento(txtDNI.Text.Trim());
 
             if (clienteExistente != null)
             {
-                lblDniMensaje.Text = "Ya existe un cliente con ese DNI.";
-                
+                //cliente ya existe, puede participar igual
+                Response.Redirect("Exito.aspx");
                 return;
             }
 
@@ -159,22 +158,20 @@ namespace presentacionWebForm
             {
                 negocio.Agregar(nuevoCliente);
                 lblDniMensaje.Text = "¡Registro exitoso! Ahora puede participar en la promo.";
-            
-               Response.Redirect("Exito.aspx");
+                Response.Redirect("Exito.aspx");
                 LimpiarCampos();
             }
             catch (Exception ex)
             {
                 lblDniMensaje.Text = "Error al registrar el cliente: " + ex.Message;
             }
-
         }
 
         protected void rblActualizar_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (rblActualizar.SelectedValue == "si")
             {
-                // habilita campos y muestra btn actualizar
+                //habilita campos y muestra btn actualizar
                 HabilitarEdicionCampos(true);
                 txtNombre.ReadOnly = false;
                 txtApellido.ReadOnly = false;
@@ -204,7 +201,7 @@ namespace presentacionWebForm
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
-            // Valida los campos
+            //valida los campos
             if (string.IsNullOrWhiteSpace(txtDNI.Text) ||
                 string.IsNullOrWhiteSpace(txtNombre.Text) ||
                 string.IsNullOrWhiteSpace(txtApellido.Text) ||
@@ -240,7 +237,7 @@ namespace presentacionWebForm
                 negocio.Actualizar(clienteActualizado);
                 lblDniMensaje.Text = "¡Datos actualizados correctamente!";
 
-                // oculta botones de actualizar y vuelve a mostrar btnParticipar
+                //oculta botones de actualizar y vuelve a mostrar btnParticipar
                 HabilitarEdicionCampos(false);
                 lblClienteRegistrado.Visible = false;
                 btnActualizar.Visible = false; 
