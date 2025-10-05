@@ -10,6 +10,31 @@ namespace negocio
 {
     public class VoucherNegocio
     {
+        public bool ExisteVoucher(string codigoVoucher)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "SELECT COUNT(*) FROM Vouchers WHERE CodigoVoucher = @codigo";
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@codigo", codigoVoucher);
+                SqlDataReader lector = datos.ejecutarLectura();
+                int count = 0;
+                if (lector.Read())
+                    count = lector.GetInt32(0);
+
+                return count > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion(); // Siempre se ejecuta, haya o no excepción
+            }
+        }
+
         public bool EsVoucherValido(string codigoVoucher)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -59,26 +84,5 @@ namespace negocio
                 throw ex;
             }
         }
-        public bool ExisteVoucher(string codigoVoucher)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                string consulta = "SELECT COUNT(*) FROM Vouchers WHERE CodigoVoucher = @codigo";
-                datos.setearConsulta(consulta);
-                datos.setearParametro("@codigo", codigoVoucher);
-                SqlDataReader lector = datos.ejecutarLectura();
-                int count = 0;
-                if (lector.Read())
-                    count = lector.GetInt32(0);
-                datos.cerrarConexion();
-                return count > 0;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
     }
 }

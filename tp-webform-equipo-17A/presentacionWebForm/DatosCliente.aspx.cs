@@ -13,13 +13,13 @@ namespace presentacionWebForm
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void btnBuscarDNI_Click(object sender, EventArgs e)
         {
             string dni = txtDNI.Text.Trim();
-            
+
 
             if (string.IsNullOrEmpty(dni))
             {
@@ -55,7 +55,7 @@ namespace presentacionWebForm
                 //esconde btn actualizar hasta que sea necesario
                 btnActualizar.Visible = false;
 
-                
+
                 btnParticipar.Visible = true;
 
                 lblDniMensaje.Text = "";
@@ -87,12 +87,11 @@ namespace presentacionWebForm
         }
 
         private void OcultarOpcionesActualizar()
-{
-    lblClienteRegistrado.Visible = false;
-    rblActualizar.Visible = false;
-    btnActualizar.Visible = false;
-}
-
+        {
+            lblClienteRegistrado.Visible = false;
+            rblActualizar.Visible = false;
+            btnActualizar.Visible = false;
+        }
 
         private void LimpiarCampos()
         {
@@ -122,7 +121,7 @@ namespace presentacionWebForm
                 lblDniMensaje.Text = "Debe completar todos los campos.";
                 return;
             }
-           
+
             if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
             {
                 lblDniMensaje.Text = "Ingrese un email válido.";
@@ -131,7 +130,7 @@ namespace presentacionWebForm
 
             ClinteNegocio negocio = new ClinteNegocio();
             Cliente clienteExistente = negocio.BuscarPorDocumento(txtDNI.Text.Trim());
-            int idCliente; 
+            int idCliente;
 
             if (clienteExistente != null)
             {
@@ -152,7 +151,7 @@ namespace presentacionWebForm
 
                 try
                 {
-                   negocio.Agregar(nuevoCliente); 
+                    negocio.Agregar(nuevoCliente);
                     idCliente = nuevoCliente.Id;
                 }
                 catch (Exception ex)
@@ -166,18 +165,17 @@ namespace presentacionWebForm
 
             if (string.IsNullOrEmpty(codigoVoucher) || Session["articuloId"] == null)
             {
-                lblDniMensaje.Text = "No se encontró el código de voucher o el premio seleccionado. Vuelva a ingresar el voucher.";
-                
+                lblDniMensaje.Text = "No se pudo realizar la operación. Vuelva a ingresar el voucher.";
                 return;
             }
 
             int idArticulo = Convert.ToInt32(Session["articuloId"]);
 
-          
             try
             {
                 VoucherNegocio voucherNegocio = new VoucherNegocio();
-                
+
+                // Agregar fecha!!!!!!
                 bool canjeExitoso = voucherNegocio.CanjearVoucher(codigoVoucher, idCliente, idArticulo);
 
                 if (canjeExitoso)
@@ -189,7 +187,7 @@ namespace presentacionWebForm
                 }
                 else
                 {
-                    Session["mensajeVoucher"] = "El voucher ya fue canjeado o es inválido para esta promoción.";
+                    Session["mensajeVoucher"] = "No se pudo realizar el canje.";
                     Response.Redirect("Default.aspx");
                 }
             }
@@ -226,7 +224,7 @@ namespace presentacionWebForm
                 txtCiudad.ReadOnly = true;
                 txtCP.ReadOnly = true;
 
-                btnParticipar .Visible = true;
+                btnParticipar.Visible = true;
                 btnActualizar.Visible = false;
             }
         }
@@ -272,8 +270,8 @@ namespace presentacionWebForm
                 //oculta botones de actualizar y vuelve a mostrar btnParticipar
                 HabilitarEdicionCampos(false);
                 lblClienteRegistrado.Visible = false;
-                btnActualizar.Visible = false; 
-                btnParticipar.Visible = true;  
+                btnActualizar.Visible = false;
+                btnParticipar.Visible = true;
                 rblActualizar.Visible = false;
             }
             catch (Exception ex)

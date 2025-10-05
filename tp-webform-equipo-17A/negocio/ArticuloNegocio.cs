@@ -59,12 +59,16 @@ namespace negocio
 
                     lista.Add(articulo);
                 }
-                datos.cerrarConexion();
+
                 return lista;
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion(); // Siempre se ejecuta, haya o no excepción
             }
         }
     }

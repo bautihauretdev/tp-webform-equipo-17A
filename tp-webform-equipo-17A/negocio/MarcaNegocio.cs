@@ -28,12 +28,16 @@ namespace negocio
                     string descripcion = lector["Descripcion"].ToString();
                     lista.Add(new Marca(id, descripcion));
                 }
-                datos.cerrarConexion();
+
                 return lista;
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion(); // Siempre se ejecuta, haya o no excepción
             }
         }
     }

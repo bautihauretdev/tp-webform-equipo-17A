@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 
-
 namespace negocio
 {
     public class AccesoDatos
@@ -71,6 +70,7 @@ namespace negocio
         {
             comando.Parameters.AddWithValue(nombre, valor ?? DBNull.Value);
         }
+
         public int ejecutarNonQuery()
         {
             comando.Connection = conexion;
