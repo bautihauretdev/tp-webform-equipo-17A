@@ -87,7 +87,7 @@
         </div>
 
         <!-- Términos y condiciones -->
-        <div class="row mb-3">
+        <div class="row mb-2">
             <div class="col-12">
                 <div class="form-check">
                     <asp:CheckBox ID="chkTerminos" runat="server" />

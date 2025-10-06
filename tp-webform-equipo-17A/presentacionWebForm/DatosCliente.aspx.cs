@@ -23,6 +23,7 @@ namespace presentacionWebForm
             if (string.IsNullOrEmpty(dni))
             {
                 lblDniMensaje.Text = "Debe ingresar un DNI.";
+                lblMensajeError.Text = "";
                 LimpiarCampos();
                 OcultarOpcionesActualizar();
                 HabilitarEdicionCampos(false);
@@ -103,11 +104,6 @@ namespace presentacionWebForm
 
         protected void btnParticipar_Click(object sender, EventArgs e)
         {
-            if (!chkTerminos.Checked)
-            {
-                lblMensajeError.Text = "Debe aceptar los términos y condiciones.";
-                return;
-            }
             if (string.IsNullOrWhiteSpace(txtDNI.Text) ||
                 string.IsNullOrWhiteSpace(txtNombre.Text) ||
                 string.IsNullOrWhiteSpace(txtApellido.Text) ||
@@ -117,6 +113,13 @@ namespace presentacionWebForm
                 string.IsNullOrWhiteSpace(txtCP.Text))
             {
                 lblMensajeError.Text = "Debe completar todos los campos.";
+                return;
+            }
+
+            if (!chkTerminos.Checked)
+            {
+                lblMensajeCorrecto.Text = "";
+                lblMensajeError.Text = "Debe aceptar los términos y condiciones.";
                 return;
             }
 
@@ -154,6 +157,7 @@ namespace presentacionWebForm
                 }
                 catch (Exception ex)
                 {
+                    lblMensajeCorrecto.Text = "";
                     lblMensajeError.Text = "Error al registrar el cliente: " + ex.Message;
                     return;
                 }
@@ -173,7 +177,6 @@ namespace presentacionWebForm
             {
                 VoucherNegocio voucherNegocio = new VoucherNegocio();
 
-                // Agregar fecha!!!!!!
                 bool canjeExitoso = voucherNegocio.CanjearVoucher(codigoVoucher, idCliente, idArticulo);
 
                 if (canjeExitoso)
@@ -191,6 +194,7 @@ namespace presentacionWebForm
             }
             catch (Exception ex)
             {
+                lblMensajeCorrecto.Text = "";
                 lblMensajeError.Text = "Error al procesar la participación: " + ex.Message;
             }
         }
@@ -238,6 +242,7 @@ namespace presentacionWebForm
                 string.IsNullOrWhiteSpace(txtCiudad.Text) ||
                 string.IsNullOrWhiteSpace(txtCP.Text))
             {
+                lblMensajeCorrecto.Text = "";
                 lblMensajeError.Text = "Debe completar todos los campos para actualizar.";
                 return;
             }
@@ -263,6 +268,7 @@ namespace presentacionWebForm
             {
                 ClinteNegocio negocio = new ClinteNegocio();
                 negocio.Actualizar(clienteActualizado);
+                lblMensajeError.Text = "";
                 lblMensajeCorrecto.Text = "¡Datos actualizados correctamente!";
 
                 //oculta botones de actualizar y vuelve a mostrar btnParticipar

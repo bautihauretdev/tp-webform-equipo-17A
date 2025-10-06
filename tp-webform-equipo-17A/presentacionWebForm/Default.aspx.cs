@@ -26,29 +26,15 @@ namespace presentacionWebForm
 
             if (!string.IsNullOrEmpty(voucher))
             {
-                bool existe = false;
+                VoucherNegocio negocio = new VoucherNegocio();
+
+                bool existe = negocio.ExisteVoucher(voucher);
                 bool esValido = false;
 
-                string connectionString ="Server= localhost\\SQLEXPRESS; Database=PROMOS_DB; Trusted_Connection=True;";
-                using (SqlConnection cnn = new SqlConnection(connectionString))
+                if (existe)
                 {
-                    // Verifica si existe el voucher
-                    string query = "SELECT COUNT(*) FROM Vouchers WHERE CodigoVoucher = @codigo";
-                    SqlCommand cmd = new SqlCommand(query, cnn);
-                    cmd.Parameters.AddWithValue("@codigo", voucher);
-                    cnn.Open();
-                    int count = (int)cmd.ExecuteScalar();
-                    existe = count > 0;
-
                     // Existe y verifica si ya fue usado
-                    if (existe)
-                    {
-                        string queryUsado = "SELECT COUNT(*) FROM Vouchers WHERE CodigoVoucher = @codigo AND IdCliente IS NULL";
-                        SqlCommand cmdUsado = new SqlCommand(queryUsado, cnn);
-                        cmdUsado.Parameters.AddWithValue("@codigo", voucher);
-                        int countValido = (int)cmdUsado.ExecuteScalar();
-                        esValido = countValido > 0;
-                    }
+                    esValido = negocio.EsVoucherValido(voucher);
                 }
 
                 if (!existe)
