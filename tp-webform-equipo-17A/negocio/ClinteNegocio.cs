@@ -51,7 +51,8 @@ namespace negocio
             try
             {
                 string consulta = "INSERT INTO Clientes (Documento, Nombre, Apellido, Email, Direccion, Ciudad, CP) " +
-                                  "VALUES (@Documento, @Nombre, @Apellido, @Email, @Direccion, @Ciudad, @CP)";
+                                  "VALUES (@Documento, @Nombre, @Apellido, @Email, @Direccion, @Ciudad, @CP)" +
+                                  "SELECT SCOPE_IDENTITY();";
                 datos.setearConsulta(consulta);
                 datos.setearParametro("@Documento", cliente.Documento);
                 datos.setearParametro("@Nombre", cliente.Nombre);
@@ -61,7 +62,14 @@ namespace negocio
                 datos.setearParametro("@Ciudad", cliente.Ciudad);
                 datos.setearParametro("@CP", cliente.CP);
 
-                datos.ejecutarAccion();
+                // Ejecutar lectura para obtener el Id generado
+                SqlDataReader lector = datos.ejecutarLectura();
+                if (lector.Read())
+                {
+                    cliente.Id = Convert.ToInt32(lector[0]); // asigna el Id al objeto
+                }
+
+                datos.cerrarConexion();
             }
             catch (Exception ex)
             {
@@ -116,7 +124,6 @@ namespace negocio
                 datos.setearParametro("@Documento", cliente.Documento);
 
                 datos.ejecutarAccion();
-
             }
             catch (Exception ex)
             {
