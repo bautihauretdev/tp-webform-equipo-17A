@@ -16,7 +16,7 @@ namespace negocio
         public EmailService()
         {
             server = new SmtpClient();
-            server.Credentials = new NetworkCredential("equipo17aprogramacion3@gmail.com", "17Aprogramacion3$");
+            server.Credentials = new NetworkCredential("equipo17aprogramacion3@gmail.com", "iirz whnq palr pyxs"); // App passwords
             server.EnableSsl = true;
             server.Port = 587;
             server.Host = "smtp.gmail.com";
@@ -25,7 +25,7 @@ namespace negocio
         public void armarCorreo(string emailDestino)
         {
             email = new MailMessage();
-            email.From = new MailAddress("noresponder@equipo17aprogramacion3.com");
+            email.From = new MailAddress("equipo17aprogramacion3@gmail.com");
             email.To.Add(emailDestino);
             email.Subject = "Promo Ganá! Confirmación de cambio de voucher";
             email.IsBodyHtml = true;
@@ -41,6 +41,10 @@ namespace negocio
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                email.Dispose();
             }
         }
 
