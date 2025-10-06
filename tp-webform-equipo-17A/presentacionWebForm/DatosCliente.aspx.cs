@@ -36,7 +36,7 @@ namespace presentacionWebForm
 
             if (cliente != null)
             {
-                //precarga datos en modo lectura
+                // precarga datos en modo lectura
                 txtNombre.Text = cliente.Nombre;
                 txtApellido.Text = cliente.Apellido;
                 txtEmail.Text = cliente.Email;
@@ -44,7 +44,7 @@ namespace presentacionWebForm
                 txtCiudad.Text = cliente.Ciudad;
                 txtCP.Text = cliente.CP.ToString();
 
-                //pone los campos en solo lectura
+                // pone los campos en solo lectura
                 HabilitarEdicionCampos(false);
 
                 // muestra label y radios
@@ -52,7 +52,7 @@ namespace presentacionWebForm
                 rblActualizar.Visible = true;
                 rblActualizar.ClearSelection();
 
-                //esconde btn actualizar hasta que sea necesario
+                // esconde btn actualizar hasta que sea necesario
                 btnActualizar.Visible = false;
 
                 btnParticipar.Visible = true;
@@ -62,6 +62,7 @@ namespace presentacionWebForm
             else
             {
                 LimpiarCampos();
+
                 // habilita edición
                 HabilitarEdicionCampos(true);
 
@@ -167,7 +168,7 @@ namespace presentacionWebForm
 
             if (string.IsNullOrEmpty(codigoVoucher) || Session["articuloId"] == null)
             {
-                lblMensajeError.Text = "No se pudo realizar la operación. Vuelva a ingresar el voucher.";
+                lblMensajeError.Text = "No pudimos encontrar el numero de voucher. Vuelva a ingresar el voucher.";
                 return;
             }
 
@@ -181,7 +182,19 @@ namespace presentacionWebForm
 
                 if (canjeExitoso)
                 {
-                    // El canje fue exitoso. Limpiamos la sesión y redirigimos.
+                    // Enviamos email
+                    EmailService emailService = new EmailService();
+                    emailService.armarCorreo(txtEmail.Text.Trim());
+                    try
+                    {
+                        emailService.enviarEmail();
+                    }
+                    catch (Exception ex)
+                    {
+                        lblMensajeError.Text = "Error al enviar email: " + ex.Message;
+                    }
+
+                    // Limpiamos la sesión y redirigimos.
                     Session.Remove("voucherCodigo");
                     Session.Remove("articuloId");
                     Response.Redirect("Exito.aspx");
