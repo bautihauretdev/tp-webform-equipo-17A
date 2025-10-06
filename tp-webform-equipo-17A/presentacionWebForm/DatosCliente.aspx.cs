@@ -20,10 +20,9 @@ namespace presentacionWebForm
         {
             string dni = txtDNI.Text.Trim();
 
-
             if (string.IsNullOrEmpty(dni))
             {
-                lblDniMensaje.Text += " - Debe ingresar un DNI.";
+                lblDniMensaje.Text = "Debe ingresar un DNI.";
                 LimpiarCampos();
                 OcultarOpcionesActualizar();
                 HabilitarEdicionCampos(false);
@@ -54,7 +53,6 @@ namespace presentacionWebForm
 
                 //esconde btn actualizar hasta que sea necesario
                 btnActualizar.Visible = false;
-
 
                 btnParticipar.Visible = true;
 
@@ -107,7 +105,7 @@ namespace presentacionWebForm
         {
             if (!chkTerminos.Checked)
             {
-                lblDniMensaje.Text = "Debe aceptar los términos y condiciones.";
+                lblMensajeError.Text = "Debe aceptar los términos y condiciones.";
                 return;
             }
             if (string.IsNullOrWhiteSpace(txtDNI.Text) ||
@@ -118,13 +116,13 @@ namespace presentacionWebForm
                 string.IsNullOrWhiteSpace(txtCiudad.Text) ||
                 string.IsNullOrWhiteSpace(txtCP.Text))
             {
-                lblDniMensaje.Text = "Debe completar todos los campos.";
+                lblMensajeError.Text = "Debe completar todos los campos.";
                 return;
             }
 
             if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
             {
-                lblDniMensaje.Text = "Ingrese un email válido.";
+                lblMensajeError.Text = "Ingrese un email válido.";
                 return;
             }
 
@@ -156,7 +154,7 @@ namespace presentacionWebForm
                 }
                 catch (Exception ex)
                 {
-                    lblDniMensaje.Text = "Error al registrar el cliente: " + ex.Message;
+                    lblMensajeError.Text = "Error al registrar el cliente: " + ex.Message;
                     return;
                 }
             }
@@ -165,7 +163,7 @@ namespace presentacionWebForm
 
             if (string.IsNullOrEmpty(codigoVoucher) || Session["articuloId"] == null)
             {
-                lblDniMensaje.Text = "No se pudo realizar la operación. Vuelva a ingresar el voucher.";
+                lblMensajeError.Text = "No se pudo realizar la operación. Vuelva a ingresar el voucher.";
                 return;
             }
 
@@ -193,7 +191,7 @@ namespace presentacionWebForm
             }
             catch (Exception ex)
             {
-                lblDniMensaje.Text = "Error al procesar la participación: " + ex.Message;
+                lblMensajeError.Text = "Error al procesar la participación: " + ex.Message;
             }
         }
 
@@ -240,13 +238,13 @@ namespace presentacionWebForm
                 string.IsNullOrWhiteSpace(txtCiudad.Text) ||
                 string.IsNullOrWhiteSpace(txtCP.Text))
             {
-                lblDniMensaje.Text = "Debe completar todos los campos para actualizar.";
+                lblMensajeError.Text = "Debe completar todos los campos para actualizar.";
                 return;
             }
 
             if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
             {
-                lblDniMensaje.Text = "Ingrese un email válido.";
+                lblMensajeError.Text = "Ingrese un email válido.";
                 return;
             }
 
@@ -265,7 +263,7 @@ namespace presentacionWebForm
             {
                 ClinteNegocio negocio = new ClinteNegocio();
                 negocio.Actualizar(clienteActualizado);
-                lblDniMensaje.Text = "¡Datos actualizados correctamente!";
+                lblMensajeCorrecto.Text = "¡Datos actualizados correctamente!";
 
                 //oculta botones de actualizar y vuelve a mostrar btnParticipar
                 HabilitarEdicionCampos(false);
@@ -276,7 +274,7 @@ namespace presentacionWebForm
             }
             catch (Exception ex)
             {
-                lblDniMensaje.Text = "Error al actualizar el cliente: " + ex.Message;
+                lblMensajeError.Text = "Error al actualizar el cliente: " + ex.Message;
             }
         }
     }
