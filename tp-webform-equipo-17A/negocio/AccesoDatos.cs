@@ -8,6 +8,7 @@ using System.Configuration;
 
 namespace negocio
 {
+    //prueba de commit para cuenta
     public class AccesoDatos
     {
         private SqlConnection conexion;
